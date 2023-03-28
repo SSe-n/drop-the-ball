@@ -5,6 +5,8 @@ using UnityEngine;
 public class CreateBall : MonoBehaviour
 {
     [SerializeField] GameObject _prefab;
+    public GameObject _effectPrefab;
+    public Transform _effectPos;    //이펙트가 생성되는 위치
 
     Camera _mainCam;
     private void Start()
@@ -24,6 +26,12 @@ public class CreateBall : MonoBehaviour
             {
                 Vector3 pos = rayHit.point;
                 Instantiate(_prefab, pos, Quaternion.LookRotation(Vector3.down));
+
+                GameObject _effectObj = Instantiate(_effectPrefab, _effectPos);
+                ParticleSystem instantEffect = _effectObj.GetComponent<ParticleSystem>();
+                BallObj.effect = instantEffect;
+
+
             }   
         }
     }

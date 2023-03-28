@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BallObj : MonoBehaviour
 {
+    public GameObject effectPrefab;
+    public static ParticleSystem effect;
+
     public int _rank;
     bool _isGrowing;
     float _time;
@@ -51,10 +54,18 @@ public class BallObj : MonoBehaviour
                 if (_rank == RuleManager._maxLevel)
                     return;
                 Destroy(other.gameObject);
+                EffectPlay();
                 _isGrowing = true;
                 _rank++;
                 gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = RuleManager._instance._balls[_rank - 1];
             }
         }
+    }
+    void EffectPlay()
+    {
+        effect.transform.position = transform.position; //이펙트 위치 -> 공의 위치
+        effect.transform.localScale = transform.localScale;
+        effect.Play();
+       
     }
 }
