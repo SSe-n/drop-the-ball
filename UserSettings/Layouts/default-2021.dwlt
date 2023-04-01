@@ -799,7 +799,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.09334339, y: -0.90332264, z: 0.2523339, w: 0.3341408}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -900,6 +900,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
+
   m_LastSelectedObjectID: 22468
 --- !u!114 &19
 MonoBehaviour:
@@ -1040,6 +1041,7 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+
     m_SelectedIDs: f45b0000
     m_LastClickedID: 23540
     m_ExpandedIDs: 000000005058000052580000565800006058000080580000725a0000c85b0000ca5b000000ca9a3b
@@ -1070,7 +1072,9 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+
     m_ExpandedIDs: 0000000050580000525800005458000056580000585800005a5800005c5800005e58000060580000
+
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1098,11 +1102,13 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
+
     m_ExpandedInstanceIDs: c6230000000000003e7e0000
+
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Ball
-      m_OriginalName: Ball
+      m_Name: TempScore
+      m_OriginalName: TempScore
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -1110,6 +1116,7 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData: 22518
+
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
