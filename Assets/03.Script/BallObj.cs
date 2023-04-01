@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class BallObj : MonoBehaviour
 {
+    public GameObject effectPrefab;
+    public static ParticleSystem effect;
+
+
     public int _rank;
     bool _isGrowing;
+    bool _isTouch;
     float _time;
     float _growSpeed = 1;
     int _dice;
+
 
     private void Awake()
     {
@@ -43,6 +49,7 @@ public class BallObj : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+
         if (other.gameObject.tag == "Ball")
         {
             BallObj temp = other.GetComponent<BallObj>();
@@ -51,10 +58,46 @@ public class BallObj : MonoBehaviour
                 if (_rank == RuleManager._maxLevel)
                     return;
                 Destroy(other.gameObject);
+                EffectPlay();
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().SfxPlay(SoundManager.Sfx.RankUp);
                 _isGrowing = true;
                 _rank++;
                 gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = RuleManager._instance._balls[_rank - 1];
+                RuleManager._instance._score += 10 * _rank;
             }
         }
+
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Box")
+        {
+            StartCoroutine("TouchRoutine");
+        }
+
+    }
+    IEnumerator TouchRoutine()
+    {
+        if (_isTouch)
+        {
+            yield break;
+        }
+
+        _isTouch = true;
+
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SfxPlay(SoundManager.Sfx.Touch_small);
+
+        yield return new WaitForSeconds(0.2f);
+        _isTouch = false;
+
+    }
+
+    void EffectPlay()
+    {
+        effect.transform.position = transform.position; //이펙트 위치 -> 공의 위치
+        effect.transform.localScale = transform.localScale;
+        effect.Play();
+
     }
 }
