@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CreateBall : MonoBehaviour
 {
-    [SerializeField] GameObject _prefab;    // °ø ¿ÀºêÁ§Æ®
-    bool _isReady = false;                  // °øÀ» ¶³¾îÆ®¸± ÁØºñ°¡ ‰ç´ÂÁö È®ÀÎ
+    [SerializeField] GameObject _prefab;
+    public GameObject _effectPrefab;
+    public Transform _effectPos;    //ì´í™íŠ¸ê°€ ìƒì„±ë˜ëŠ” ìœ„ì¹˜
 
-    LayerMask lMask;                        // touchZoneÀÇ ·¹ÀÌ¾î ¸¶½ºÅ©
+    LayerMask lMask;                        // touchZoneì˜ ë ˆì´ì–´ ë§ˆìŠ¤í¬
     Camera _mainCam;
-    GameObject _nowball;                    // »ı¼ºµÉ º¼
-    Vector3 _lastPosition = Vector3.zero;   // ¸¶Áö¸· touchZoneÀÇ ÅÍÄ¡ À§Ä¡
+    GameObject _nowball;                    // ìƒì„±ë  ë³¼
+    Vector3 _lastPosition = Vector3.zero;   // ë§ˆì§€ë§‰ touchZoneì˜ í„°ì¹˜ ìœ„ì¹˜
     float _time = 0;
     private void Start()
     {
@@ -23,7 +24,21 @@ public class CreateBall : MonoBehaviour
         _time += Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && _time >= RuleManager._reloadTime)
         {
-            ReadyBall();
+            Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            LayerMask lMask;
+            lMask = 1 << LayerMask.NameToLayer("TouchZone");
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity, lMask))
+            {
+                Vector3 pos = rayHit.point;
+                Instantiate(_prefab, pos, Quaternion.LookRotation(Vector3.down));
+
+                GameObject _effectObj = Instantiate(_effectPrefab, _effectPos);
+                ParticleSystem instantEffect = _effectObj.GetComponent<ParticleSystem>();
+                BallObj.effect = instantEffect;
+
+
+            }   
         }
         else if (Input.GetMouseButtonUp(0) && _isReady)
         {
@@ -36,7 +51,7 @@ public class CreateBall : MonoBehaviour
         }
     }
     /// <summary>
-    /// °øÀ» È­¸é»ó¿¡ ÁØºñ½ÃÅ²´Ù.
+    /// ê³µì„ í™”ë©´ìƒì— ì¤€ë¹„ì‹œí‚¨ë‹¤.
     /// </summary>
     void ReadyBall()
     {
@@ -55,7 +70,7 @@ public class CreateBall : MonoBehaviour
         }   
     }
     /// <summary>
-    /// °øÀ» ¶³¾îÆ®¸°´Ù.
+    /// ê³µì„ ë–¨ì–´íŠ¸ë¦°ë‹¤.
     /// </summary>
     void ThrowBall()
     {
@@ -64,9 +79,9 @@ public class CreateBall : MonoBehaviour
         _isReady = false;
     }
     /// <summary>
-    /// ÅÍÄ¡ÁÂÇ¥¸¦ À¯´ÏÆ¼°ø°£ÀÇ ÁÂÇ¥·Î º¯È¯½ÃÅ²´Ù.
+    /// í„°ì¹˜ì¢Œí‘œë¥¼ ìœ ë‹ˆí‹°ê³µê°„ì˜ ì¢Œí‘œë¡œ ë³€í™˜ì‹œí‚¨ë‹¤.
     /// </summary>
-    /// <returns>ÅÍÄ¡ÁÂÇ¥ or ¸¶Áö¸·À¸·Î Zone¿¡ ÅÍÄ¡µÈ ÁÂÇ¥</returns>
+    /// <returns>í„°ì¹˜ì¢Œí‘œ or ë§ˆì§€ë§‰ìœ¼ë¡œ Zoneì— í„°ì¹˜ëœ ì¢Œí‘œ</returns>
     Vector3 GetScreenPoint()
     {
         Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
