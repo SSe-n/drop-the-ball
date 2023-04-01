@@ -12,19 +12,13 @@ public class RuleManager : MonoBehaviour
     public enum BallType
     {
         Balls = 0,
+        sdfS
     }
-    /// <summary>
-    /// 공의 최대 레벨
-    /// </summary>
-    public static int _maxLevel = 5;
-    /// <summary>
-    /// 현재 적용한 스킨
-    /// </summary>
-    public BallType _ballType;
-    /// <summary>
-    /// 스킨들의 레벨별 머티리얼
-    /// </summary>
-    public List<Material> _balls;
+    public static int _maxLevel = 8;            // 공의 최대 레벨
+    public BallType _ballType;                  // 공의 타입
+    public List<Material> _balls;               // 게임 시작시 입힌 스킨의 머티리얼
+    public static float _reloadTime = 1;        // 공의 장전 시간
+    public int _score;
     // 임시
     private void Awake()
     {
