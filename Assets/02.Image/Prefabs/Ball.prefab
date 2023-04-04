@@ -60,6 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c033d1faab2914a971854ba5a50ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
+  soundManager: {fileID: 0}
   _rank: 0
 --- !u!54 &4881525818232286730
 Rigidbody:
