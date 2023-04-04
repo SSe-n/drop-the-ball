@@ -54,7 +54,6 @@ public class BallObj : MonoBehaviour
                 _isGrowing = true;
                 _rank++;
                 gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = RuleManager._instance._balls[_rank - 1];
-                RuleManager._instance._score += 10 * _rank;
             }
         }
     }
