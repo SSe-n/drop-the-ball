@@ -7,7 +7,6 @@ TagManager:
   - CameraPos
   - Ball
   - RuleManager
-  - Box
   layers:
   - Default
   - TransparentFX
